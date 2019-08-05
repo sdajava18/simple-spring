@@ -10,12 +10,18 @@ import java.util.Map;
 
 public class HelloController implements Controller {
 
-	@Override
+    private final MyTestBean myTestBean;
+
+    public HelloController(MyTestBean myTestBean) {
+        this.myTestBean = myTestBean;
+    }
+
+    @Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String name = request.getParameter("name");
 
 		Map<String, String> map = new HashMap<>();
-		map.put("name", name);
+		map.put("name", myTestBean.toUpperCase(name));
 
 		return new ModelAndView("welcome", map);
 	}

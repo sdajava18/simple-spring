@@ -9,7 +9,11 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<bean name="/hello.htm" class="org.websparrow.HelloController" />
+	<bean name="testBean" class="org.websparrow.MyTestBean" />
+
+	<bean name="/hello.htm" class="org.websparrow.HelloController" >
+		<constructor-arg ref="testBean"/>
+	</bean>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" />
