@@ -10,13 +10,16 @@ import java.util.Map;
 
 public class HelloController implements Controller {
 
-    private final MyTestBean myTestBean;
+	private IMyTestBean myTestBean;
 
-    public HelloController(MyTestBean myTestBean) {
-        this.myTestBean = myTestBean;
-    }
+	public HelloController() {
+	}
 
-    @Override
+	public void setMyTestBean(IMyTestBean myTestBean) {
+		this.myTestBean = myTestBean;
+	}
+
+	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String name = request.getParameter("name");
 
