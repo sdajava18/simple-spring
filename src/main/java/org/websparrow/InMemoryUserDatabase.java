@@ -1,10 +1,13 @@
 package org.websparrow;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class InMemoryUserDatabase implements IUserDatabase {
+public class InMemoryUserDatabase implements IUserDatabase, InitializingBean, DisposableBean {
 
     private List<User> users;
 
@@ -27,5 +30,15 @@ public class InMemoryUserDatabase implements IUserDatabase {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("Bean zainicjowany " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("Bean prawie zniszczony" + this.getClass().getSimpleName());
     }
 }

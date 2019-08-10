@@ -1,5 +1,7 @@
 package org.websparrow;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
@@ -9,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class HelloController implements Controller {
+public class HelloController implements Controller, InitializingBean, DisposableBean {
 
 	private StringService stringService;
 
@@ -36,6 +38,16 @@ public class HelloController implements Controller {
 		}
 
 		return new ModelAndView("welcome", map);
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("Bean zainicjowany " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	public void destroy() throws Exception {
+		System.out.println("Bean prawie zniszczony " + this.getClass().getSimpleName());
 	}
 
 }
