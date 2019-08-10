@@ -11,8 +11,11 @@
 
 	<bean name="stringService" class="org.websparrow.StringService" />
 
+	<bean name="inMemoryDatabase" class="org.websparrow.InMemoryUserDatabase" />
+
 	<bean name="/hello.htm" class="org.websparrow.HelloController" >
-		<constructor-arg ref="stringService"/>
+		<constructor-arg index="0" ref="stringService"/>
+		<constructor-arg index="1" ref="inMemoryDatabase"/>
 	</bean>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

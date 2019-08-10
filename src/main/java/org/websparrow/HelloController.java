@@ -7,21 +7,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class HelloController implements Controller {
 
 	private StringService stringService;
 
-	public HelloController(StringService stringService) {
+	private IUserDatabase userDatabase;
+
+	public HelloController(StringService stringService, IUserDatabase userDatabase) {
 		this.stringService = stringService;
+		this.userDatabase = userDatabase;
 	}
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String name = request.getParameter("name");
 
+		Optional<User> userOptional = userDatabase.getByName(name);
+
 		Map<String, String> map = new HashMap<>();
-		map.put("name", this.stringService.uppercase(name));
+		if(userOptional.isPresent()) {
+			User user = userOptional.get();
+
+			map.put("name", this.stringService.uppercase(user.getName()));
+			map.put("surname", user.getSurname());
+			map.put("age", String.valueOf(user.getAge()));
+		}
 
 		return new ModelAndView("welcome", map);
 	}

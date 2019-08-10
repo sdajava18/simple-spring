@@ -8,7 +8,9 @@
 </head>
 <body>
 
-	<h2>Hello ${name}</h2>
+	<h2>Name ${name}</h2>
+	<h2>Surname ${surname}</h2>
+	<h2>Age ${age}</h2>
 	<p>Welcome to Spring MVC world.</p>
 
 </body>
