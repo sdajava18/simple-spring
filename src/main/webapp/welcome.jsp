@@ -11,5 +11,9 @@
 	<h2>Hello ${name}</h2>
 	<p>Welcome to Spring MVC world.</p>
 
+	Name: ${user.name} <br>
+	Surname: ${user.surname} <br>
+	Age: ${user.age} <br>
+
 </body>
 </html>
